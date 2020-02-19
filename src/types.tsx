@@ -29,6 +29,7 @@ export type Theme = {
   roundness: number;
   colors: {
     primary: string;
+    backgroundSecondary: string;
     background: string;
     surface: string;
     accent: string;

@@ -6,11 +6,12 @@ import { Theme } from '../types';
 
 const DefaultTheme: Theme = {
   dark: false,
-  roundness: 4,
+  roundness: 8,
   colors: {
-    primary: '#6200ee',
+    primary: '#440099',
     accent: '#03dac4',
     background: '#f6f6f6',
+    backgroundSecondary: '#F3F6F9',
     surface: white,
     error: '#B00020',
     text: black,

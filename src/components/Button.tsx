@@ -122,31 +122,7 @@ type State = {
 class Button extends React.Component<Props, State> {
   static defaultProps: Partial<Props> = {
     mode: 'text',
-    uppercase: true,
-  };
-
-  state = {
-    elevation: new Animated.Value(this.props.mode === 'contained' ? 2 : 0),
-  };
-
-  private handlePressIn = () => {
-    if (this.props.mode === 'contained') {
-      const { scale } = this.props.theme.animation;
-      Animated.timing(this.state.elevation, {
-        toValue: 8,
-        duration: 200 * scale,
-      }).start();
-    }
-  };
-
-  private handlePressOut = () => {
-    if (this.props.mode === 'contained') {
-      const { scale } = this.props.theme.animation;
-      Animated.timing(this.state.elevation, {
-        toValue: 2,
-        duration: 150 * scale,
-      }).start();
-    }
+    uppercase: false,
   };
 
   render() {
@@ -159,7 +135,6 @@ class Button extends React.Component<Props, State> {
       icon,
       color: buttonColor,
       children,
-      uppercase,
       accessibilityLabel,
       onPress,
       style,
@@ -189,11 +164,8 @@ class Button extends React.Component<Props, State> {
     }
 
     if (mode === 'outlined') {
-      borderColor = color(theme.dark ? white : black)
-        .alpha(0.29)
-        .rgb()
-        .string();
-      borderWidth = StyleSheet.hairlineWidth;
+      borderColor = disabled ? colors.disabled : colors.primary;
+      borderWidth = 1;
     } else {
       borderColor = 'transparent';
       borderWidth = 0;
@@ -206,7 +178,6 @@ class Button extends React.Component<Props, State> {
         .string();
     } else if (mode === 'contained') {
       let isDark;
-
       if (typeof dark === 'boolean') {
         isDark = dark;
       } else {
@@ -215,7 +186,6 @@ class Button extends React.Component<Props, State> {
             ? false
             : !color(backgroundColor).isLight();
       }
-
       textColor = isDark ? white : black;
     } else if (buttonColor) {
       textColor = buttonColor;
@@ -227,6 +197,12 @@ class Button extends React.Component<Props, State> {
       .alpha(0.32)
       .rgb()
       .string();
+
+    const underlayColor = color(textColor)
+      .alpha(0.32)
+      .rgb()
+      .string();
+
     const buttonStyle = {
       backgroundColor,
       borderColor,
@@ -234,31 +210,19 @@ class Button extends React.Component<Props, State> {
       borderRadius: roundness,
     };
     const touchableStyle = {
-      borderRadius: style
-        ? StyleSheet.flatten(style).borderRadius || roundness
-        : roundness,
+      borderRadius: roundness,
     };
     const textStyle = { color: textColor, ...font };
-    const elevation =
-      disabled || mode !== 'contained' ? 0 : this.state.elevation;
 
     return (
       <Surface
         {...rest}
-        style={[
-          styles.button,
-          compact && styles.compact,
-          { elevation } as ViewStyle,
-          buttonStyle,
-          style,
-        ]}
+        style={[styles.button, compact && styles.compact, buttonStyle, style]}
       >
         <TouchableRipple
           borderless
           delayPressIn={0}
           onPress={onPress}
-          onPressIn={this.handlePressIn}
-          onPressOut={this.handlePressOut}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
@@ -267,6 +231,7 @@ class Button extends React.Component<Props, State> {
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}
+          underlayColor={underlayColor}
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
@@ -286,7 +251,6 @@ class Button extends React.Component<Props, State> {
               style={[
                 styles.label,
                 compact && styles.compactLabel,
-                uppercase && styles.uppercaseLabel,
                 textStyle,
                 font,
                 labelStyle,
@@ -321,15 +285,13 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    letterSpacing: 1,
-    marginVertical: 9,
+    letterSpacing: 0,
+    marginVertical: 16,
     marginHorizontal: 16,
   },
   compactLabel: {
     marginHorizontal: 8,
-  },
-  uppercaseLabel: {
-    textTransform: 'uppercase',
+    marginVertical: 8,
   },
 });
 

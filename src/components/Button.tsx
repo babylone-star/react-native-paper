@@ -269,6 +269,7 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 64,
     borderStyle: 'solid',
+    elevation: 0,
   },
   compact: {
     minWidth: 'auto',

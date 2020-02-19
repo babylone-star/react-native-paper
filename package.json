@@ -1,6 +1,6 @@
 {
-  "name": "react-native-paper",
-  "version": "3.6.0",
+  "name": "@babylon/medkit-mobile",
+  "version": "0.0.1",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -42,7 +42,7 @@
     "example": "yarn --cwd example"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://artifactory.ops.babylontech.co.uk/artifactory/api/npm/babylon-virtual-npm/"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",

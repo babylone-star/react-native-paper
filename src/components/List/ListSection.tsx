@@ -81,6 +81,8 @@ class ListSection extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderWidth: 1,
   },
 });
 

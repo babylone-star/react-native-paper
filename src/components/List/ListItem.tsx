@@ -72,6 +72,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
+   * Style that is passed to the Row element.
+   */
+  rowStyle?: StyleProp<ViewStyle>;
+  /**
    * Truncate Title text such that the total number of lines does not
    * exceed this number.
    */
@@ -164,15 +168,18 @@ class ListItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      rowStyle,
       titleStyle,
       titleNumberOfLines,
       titleEllipsizeMode,
       ...rest
     } = this.props;
+
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
       .string();
+
     const descriptionColor = color(theme.colors.text)
       .alpha(0.54)
       .rgb()
@@ -184,7 +191,7 @@ class ListItem extends React.Component<Props> {
         style={[styles.container, style]}
         onPress={onPress}
       >
-        <View style={styles.row}>
+        <View style={[styles.row, rowStyle]}>
           {left
             ? left({
                 color: descriptionColor,
@@ -227,10 +234,10 @@ class ListItem extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-  },
+},
   row: {
     flexDirection: 'row',
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 16,
@@ -240,10 +247,10 @@ const styles = StyleSheet.create({
   },
   marginVerticalNone: { marginVertical: 0 },
   iconMarginLeft: { marginLeft: 0, marginRight: 16 },
-  iconMarginRight: { marginRight: 0 },
+  iconMarginRight: { marginRight: 0, },
   item: {
-    marginVertical: 6,
-    paddingLeft: 8,
+    marginVertical: 14,
+    marginLeft: 16,
   },
   content: {
     flex: 1,

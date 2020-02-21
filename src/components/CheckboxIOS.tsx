@@ -48,7 +48,7 @@ class CheckboxIOS extends React.Component<Props> {
   static displayName = 'Checkbox.IOS';
 
   render() {
-    const { status, disabled, onPress, theme, ...rest } = this.props;
+    const { status, disabled, onPress, theme, style, ...rest } = this.props;
     const checked = status === 'checked';
     const indeterminate = status === 'indeterminate';
 
@@ -84,13 +84,13 @@ class CheckboxIOS extends React.Component<Props> {
         accessibilityRole="button"
         accessibilityStates={disabled ? ['disabled'] : []}
         accessibilityLiveRegion="polite"
-        style={styles.container}
+        style={[styles.container, checked ? styles.checkedContainer : {}, style]}
       >
         <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
           <MaterialCommunityIcon
             allowFontScaling={false}
             name={icon}
-            size={24}
+            size={20}
             color={checkedColor}
             direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
           />
@@ -103,8 +103,16 @@ class CheckboxIOS extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
-    padding: 6,
+    paddingTop: 1,
+    paddingLeft: 1,
+    paddingRight: 1,
+    backgroundColor: 'white',
+    borderColor: 'rgba(0, 0, 0, 0.6)',
+    borderWidth: 2,
   },
+  checkedContainer: {
+    backgroundColor: '#440099',
+  }
 });
 
 export default withTheme(CheckboxIOS);

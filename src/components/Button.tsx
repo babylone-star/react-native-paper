@@ -81,6 +81,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * @optional
+   */
+  testID?: string;
 };
 
 type State = {
@@ -141,6 +145,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      testID,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -232,6 +237,7 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
           underlayColor={underlayColor}
+          testID={testID}
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (

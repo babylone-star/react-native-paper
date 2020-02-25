@@ -1,6 +1,6 @@
 {
   "name": "@babylon/medkit-mobile",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",

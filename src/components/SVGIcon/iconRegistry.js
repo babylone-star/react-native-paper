@@ -1,4 +1,5 @@
 import Close from './close.svg';
+import Back from './back.svg';
 import Help from './help.svg';
 import InviteFriends from './invite_friends.svg';
 import MedicalRecords from './medical_records.svg';
@@ -18,6 +19,7 @@ import NutritionLarge from './nutrition_large.svg';
 
 const registry = {
   navClose: Close,
+  navBack: Back,
   help: Help,
   inviteFriends: InviteFriends,
   medicalRecords: MedicalRecords,
